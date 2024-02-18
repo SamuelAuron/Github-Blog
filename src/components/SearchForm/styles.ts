@@ -8,7 +8,7 @@ export const SearchFormContainer = styled.form`
   gap: 1rem;
   
   max-width: 1184px;
-  margin: 72px auto;
+  margin: 72px auto 48px;
 
   div{
     display: flex;
@@ -39,6 +39,4 @@ export const SearchFormContainer = styled.form`
   input:focus{
     border: none;
   }
-
-  
 `

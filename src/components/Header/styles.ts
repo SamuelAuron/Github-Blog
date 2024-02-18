@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
-  background: ${(props) => props.theme['blue-900']};
+  background: ${(props) => props.theme['blue-800']};
   padding: 1.875rem 0 1.875rem;
 `
 
