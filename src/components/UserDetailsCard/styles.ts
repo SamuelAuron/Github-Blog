@@ -10,7 +10,7 @@ export const UserContainer = styled.div`
   margin-top: -5rem;
   display: flex;
   
-  background: ${(props) => props.theme['blue-900']};
+  background:  ${(props) => props.theme['blue-800']};
   border-radius: 10px;
 
   img{
