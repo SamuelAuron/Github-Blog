@@ -1,15 +1,11 @@
 import styled from 'styled-components'
 
-export const PostCardContainer = styled.div`
-  max-width: 26rem;
-  height: 16.25rem;
-  padding: 2rem;
+export const PostCardContainer = styled.form`
+  max-width: 416px;
+  padding: 32px;
   border-radius: 10px;
   background: ${(props) => props.theme['blue-700']};
-  color: ${(props) => props.theme['blue-400']};
-  text-decoration: none;
-  
-  overflow: hidden;
+  margin: 2rem;
 
   div{
     display: flex;
@@ -18,23 +14,11 @@ export const PostCardContainer = styled.div`
 
   h2{
     color: ${(props) => props.theme['blue-100']};
-    height: 4rem;
   }
 
   span{
-    min-width: 3.31rem;
+    min-width: 53px;
     color: ${(props) => props.theme['blue-400']};
     font-size: 0.875rem;
-  }
-
-  p{
-    margin-top: 1.25rem;
-    height: 11.12rem;
-    overflow: hidden;
-  }
-
-  &:hover {
-    cursor: pointer;
-    border: 2px solid ${(props) => props.theme['blue-500']};
   }
 `

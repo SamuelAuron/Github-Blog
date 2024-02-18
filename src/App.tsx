@@ -4,6 +4,7 @@ import { defaultTheme } from './styles/themes/default'
 import { Header } from './components/Header'
 import { UserDetailsCard } from './components/UserDetailsCard'
 import { SearchForm } from './components/SearchForm'
+import { PostCard } from './components/PostCard'
 
 function App() {
 
@@ -13,6 +14,10 @@ function App() {
       <Header />
       <UserDetailsCard />
       <SearchForm />
+      <PostCard />
+      <PostCard />
+      <PostCard />
+      <PostCard />
     </ThemeProvider>
     
   )
