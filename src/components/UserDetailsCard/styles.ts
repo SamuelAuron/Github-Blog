@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 
 export const UserContainer = styled.div`
-  max-width: 70rem;
+  width: 100%;
+  height: min-content;
+  max-width: 1120px;
   box-shadow: 0px 2px 28px black;
   padding: 2.5rem 2rem;
   margin: 0 auto;
   margin-top: -5rem;
   display: flex;
   
-  background:  ${(props) => props.theme['blue-800']};
+  background: ${(props) => props.theme['blue-900']};
   border-radius: 10px;
+
+  img{
+    width: min-content;
+    height: min-content;
+  }
 
   h1{
     color: ${(props) => props.theme['blue-100']};
@@ -22,15 +29,18 @@ export const UserContainer = styled.div`
   a{
     display: flex;
     align-items: center;
+    width: 98px;
     height: min-content;
-    margin-left: auto;
 
     text-decoration: none;
-    color: ${(props) => props.theme.blue};    
+    color: blue;
 
     img{
-      margin-left: 0.5rem;
+      margin-left: .5rem;
+      color: ${(props) => props.theme.blue};  
     }
+
+    
   }
 
   a:hover {
@@ -43,15 +53,8 @@ export const UserContainer = styled.div`
 
 `
 
-export const Avatar = styled.img`
-  max-width: 9.25rem;
-  max-height: 9.25rem;
-
-  border-radius: 8px;
-`
-
-export const UserInfos = styled.div`
-  max-height: 13.25rem;
+export const UserContent = styled.div`
+  max-height: 212px;
   margin: 0 1rem;
 
   display: flex;

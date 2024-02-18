@@ -1,69 +1,40 @@
-import {Avatar, UserContainer, UserInfos, UserInfo } from "./styles";
+import {UserContainer, UserContent, UserInfo, UserLink } from "./styles";
 
+
+import avatar from "../../assets/avatar.png"
 import githubIcon from "../../assets/githubIcon.svg"
 import followersIcon from '../../assets/followersIcon.svg'
 import companyIcon from "../../assets/companyIcon.svg"
 import linkIcon from "../../assets/linkIcon.svg"
 
-import { useEffect, useState } from "react";
-import { getUserData } from "../../services/api";
-
-interface UserInfo {
-  avatar_url: string
-  name: string
-  bio?: string
-  login: string
-  company?: string
-  followers: number
-  html_url: string
-}
-
 export function UserDetailsCard(){
-  const [userData, setUserData] = useState<UserInfo>()
-
-  useEffect(() =>{
-    const setUser = async () => {
-      const response = await getUserData()
-      setUserData(response)
-    }
-
-    setUser();
-  }, [])
-
   return(
+    
     <UserContainer>
-      <Avatar src={userData?.avatar_url} alt="avatar" />
-
-      <UserInfos>
-        <h1>{userData?.name}</h1>
-        <p>{userData?.bio}</p>
+      <img src={avatar} alt="avatar" />
+      <UserContent>
+        <h1>Cameron Williamson</h1>
+        <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
           
         <div>
           <UserInfo>
             <img src={githubIcon} alt="" />
-            {userData?.login}
+            cameronwll
           </UserInfo>
-
           <UserInfo>
-            {userData?.company &&
-            <>
-              <img src={companyIcon} alt="" /> 
-              <span>{userData?.company}</span>
-            </> 
-            }
+            <img src={companyIcon} alt="" />
+            RocketSeat
           </UserInfo>
-
           <UserInfo>
             <img src={followersIcon} alt="" />
-            {userData?.followers}
-            {' '}
-            Seguidores
+            32 seguidores
           </UserInfo>
         </div>
-      </UserInfos>
+      </UserContent>
           
-      <a href={userData?.html_url}>
-        GITHUB
+        
+      <a href="">
+        GitHub 
         <img src={linkIcon} alt="" />  
       </a>
 
