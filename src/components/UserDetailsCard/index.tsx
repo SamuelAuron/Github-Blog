@@ -1,39 +1,80 @@
-import {UserContainer, UserContent, UserInfo, UserLink } from "./styles";
+import {Avatar, UserContainer, UserContent, UserInfo } from "./styles";
 
 
-import avatar from "../../assets/avatar.png"
 import githubIcon from "../../assets/githubIcon.svg"
 import followersIcon from '../../assets/followersIcon.svg'
 import companyIcon from "../../assets/companyIcon.svg"
 import linkIcon from "../../assets/linkIcon.svg"
 
+
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface UserInfo {
+  avatar_url: string
+  name: string
+  bio?: string
+  login: string
+  company?: string
+  followers: number
+  html_url: string
+}
+
 export function UserDetailsCard(){
+  const [userData, setUserData] = useState<UserInfo>()
+  
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('https://api.github.com/users/samuelauron', {
+          headers: {
+            Authorization: `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`,
+          },
+        });
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar dados do usuário:', error);
+      }
+    };
+    console.log(userData)
+    fetchUserData();
+  }, []);
+
+  
+
   return(
     
     <UserContainer>
-      <img src={avatar} alt="avatar" />
+      <Avatar src={userData?.avatar_url} alt="avatar" />
       <UserContent>
-        <h1>Cameron Williamson</h1>
-        <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat pulvinar vel mass.</p>
+        <h1>{userData?.name}</h1>
+        <p>{userData?.bio}</p>
           
         <div>
           <UserInfo>
             <img src={githubIcon} alt="" />
-            cameronwll
+            {userData?.login}
           </UserInfo>
           <UserInfo>
-            <img src={companyIcon} alt="" />
-            RocketSeat
+            {userData?.company &&
+            <>
+              <img src={companyIcon} alt="" /> 
+              <span>{userData?.company}</span>
+            </> 
+            }
           </UserInfo>
           <UserInfo>
             <img src={followersIcon} alt="" />
-            32 seguidores
+            {userData?.followers}
+            {' '}
+            Seguidores
           </UserInfo>
         </div>
       </UserContent>
           
         
-      <a href="">
+      <a href={userData?.html_url}>
         GitHub 
         <img src={linkIcon} alt="" />  
       </a>
