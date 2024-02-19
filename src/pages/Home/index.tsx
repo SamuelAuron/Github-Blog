@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { PostCard } from "../../components/PostCard";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
+import { Posts } from "./styles";
 
 interface Issue {
   title: string
   body: string
   created_at: string
   number: number
+  total_count: number
 }
 
 export function Home() {
@@ -34,13 +36,15 @@ export function Home() {
 
     fetchIssues();
   }, []);
+
+  console.log(issues.length)
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Header />
       <UserDetailsCard/>
-      <SearchForm />
-      <div>
+      <SearchForm number= {issues.length.toString()} />
+      <Posts>
       {issues.map((issue) => {
           return(
             <PostCard 
@@ -51,7 +55,7 @@ export function Home() {
             />
           )
         })}
-      </div>
+      </Posts>
     </ThemeProvider>
       
   

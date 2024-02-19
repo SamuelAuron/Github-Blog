@@ -1,13 +1,12 @@
 import styled from 'styled-components'
 
-export const PostCardContainer = styled.form`
+export const PostCardContainer = styled.div`
   max-width: 416px;
-  max-height: 260px;
+  height: 260px;
   padding: 32px;
   border-radius: 10px;
   background: ${(props) => props.theme['blue-700']};
-  margin: 2rem;
-
+  
   overflow: hidden;
 
   div{
@@ -17,6 +16,7 @@ export const PostCardContainer = styled.form`
 
   h2{
     color: ${(props) => props.theme['blue-100']};
+    height: 64px;
   }
 
   span{
@@ -26,8 +26,8 @@ export const PostCardContainer = styled.form`
   }
 
   p{
-    
-    height: 112px;
+    margin-top: 20px;
+    height: 178px;
     overflow: hidden;
   }
 `

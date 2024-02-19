@@ -1,15 +1,15 @@
 import { SearchFormContainer } from './styles'
 
-
-
-
-export function SearchForm() {
+interface NumberOfPosts{
+  number: string
+}
+export function SearchForm({number}: NumberOfPosts) {
 
   return (
     <SearchFormContainer >
       <div>
         <label>Publicações</label>
-        <span>6 publicações</span>
+        <span>{number} publicações</span>
       </div>
       
       <input
