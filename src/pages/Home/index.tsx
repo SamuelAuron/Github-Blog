@@ -1,13 +1,12 @@
 import axios from "axios";
 import { Header } from "../../components/Header";
-import { SearchForm } from "../../components/SearchForm";
 import { UserDetailsCard } from "../../components/UserDetailsCard";
 import { GlobalStyle } from "../../styles/global";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { PostCard } from "../../components/PostCard";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
-import { Posts } from "./styles";
+import { Posts, SearchFormContainer } from "./styles";
 
 interface Issue {
   title: string
@@ -18,6 +17,7 @@ interface Issue {
 }
 
 export function Home() {
+  const [search, setSearch] = useState('')
   const [issues, setIssues] = useState<Issue[]>([])
 
   useEffect(() => {
@@ -37,14 +37,35 @@ export function Home() {
     fetchIssues();
   }, []);
 
+  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+    const query = event.target.value
+
+    setSearch(query)
+  }
+
+  const filteredPosts = search != ''
+    ? issues.filter(issue => issue.body.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+    : issues
+
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       <Header />
       <UserDetailsCard/>
-      <SearchForm number= {issues.length.toString()} />
+      <SearchFormContainer>
+        <div>
+          <label>Publicações</label>
+          <span>{issues.length} publicações</span>
+        </div>
+      
+        <input
+          type="text"
+          placeholder="Buscar conteúdo"
+          onChange={handleSearch}
+        />
+      </SearchFormContainer>
       <Posts>
-      {issues.map((issue) => {
+      {filteredPosts.map((issue) => {
           return(
             <PostCard 
               key={issue.number} 
