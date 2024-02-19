@@ -12,7 +12,7 @@ import { Posts } from "./styles";
 interface Issue {
   title: string
   body: string
-  created_at: string
+  created_at: Date
   number: number
   total_count: number
 }
@@ -37,7 +37,6 @@ export function Home() {
     fetchIssues();
   }, []);
 
-  console.log(issues.length)
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
