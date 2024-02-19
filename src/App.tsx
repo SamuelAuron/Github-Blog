@@ -4,22 +4,12 @@ import { defaultTheme } from './styles/themes/default'
 import { Header } from './components/Header'
 import { UserDetailsCard } from './components/UserDetailsCard'
 import { SearchForm } from './components/SearchForm'
-import { PostCard } from './components/PostCard'
+import { Home } from './pages/Home'
 
 function App() {
 
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <GlobalStyle />
-      <Header />
-      <UserDetailsCard />
-      <SearchForm />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-      <PostCard />
-    </ThemeProvider>
-    
+    <Home />
   )
 }
 

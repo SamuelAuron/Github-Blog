@@ -1,72 +1,59 @@
+import axios from "axios";
+import { Header } from "../../components/Header";
+import { SearchForm } from "../../components/SearchForm";
 import { UserDetailsCard } from "../../components/UserDetailsCard";
 import { GlobalStyle } from "../../styles/global";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PostCard } from "../../components/PostCard";
 import { ThemeProvider } from "styled-components";
 import { defaultTheme } from "../../styles/themes/default";
-import { Posts, SearchFormContainer } from "./styles";
-import { getIssuesData } from "../../services/api";
 
 interface Issue {
   title: string
   body: string
-  created_at: Date
+  created_at: string
   number: number
-  total_count: number
 }
 
 export function Home() {
-  const [search, setSearch] = useState('')
   const [issues, setIssues] = useState<Issue[]>([])
 
-  useEffect(() =>{
+  useEffect(() => {
     const fetchIssues = async () => {
-      const response = await getIssuesData()
-      setIssues(response)
-    }
+      try {
+        const response = await axios.get('https://api.github.com/search/issues', {
+          params: {
+            q: 'author:samuelauron',
+          }
+        });
+        setIssues(response.data.items);
+      } catch (error) {
+        console.error('Erro ao buscar as issues:', error);
+      }
+    };
 
     fetchIssues();
-  }, [])
-
-  function handleSearch(event: ChangeEvent<HTMLInputElement>) {
-    const query = event.target.value
-
-    setSearch(query)
-  }
-
-  const filteredPosts = search != ''
-    ? issues.filter(issue => issue.body.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-    : issues
-
+  }, []);
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
+      <Header />
       <UserDetailsCard/>
-      <SearchFormContainer>
-        <div>
-          <label>Publicações</label>
-          <span>{issues.length} publicações</span>
-        </div>
-      
-        <input
-          type="text"
-          placeholder="Buscar conteúdo"
-          onChange={handleSearch}
-        />
-      </SearchFormContainer>
-      <Posts>
-      {filteredPosts.map((issue) => {
+      <SearchForm />
+      <div>
+      {issues.map((issue) => {
           return(
             <PostCard 
               key={issue.number} 
-              id={issue.number}
               title={issue.title}
               body={issue.body}
               created_at={issue.created_at}
             />
           )
         })}
-      </Posts>
-    </ThemeProvider> 
+      </div>
+    </ThemeProvider>
+      
+  
   )
 }
