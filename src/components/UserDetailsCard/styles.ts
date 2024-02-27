@@ -26,7 +26,7 @@ export const UserContainer = styled.div`
     margin-left: auto;
 
     text-decoration: none;
-    color: blue;    
+    color: ${(props) => props.theme.blue};    
 
     img{
       margin-left: 8px;

@@ -11,7 +11,7 @@ interface Issue {
 
 export function PostCard({title, body, created_at}: Issue) {
   return(
-    <PostCardContainer>
+    <PostCardContainer href=''>
       <div>
         <h2>{title}</h2>
         <span>{formatDistanceToNow(created_at, {

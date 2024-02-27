@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
-export const PostCardContainer = styled.div`
+export const PostCardContainer = styled.a`
   max-width: 416px;
   height: 260px;
   padding: 32px;
   border-radius: 10px;
   background: ${(props) => props.theme['blue-700']};
+  color: ${(props) => props.theme['blue-400']};
+  text-decoration: none;
   
   overflow: hidden;
 
