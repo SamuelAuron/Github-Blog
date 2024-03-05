@@ -50,7 +50,7 @@ export const Avatar = styled.img`
   border-radius: 8px;
 `
 
-export const UserContent = styled.div`
+export const UserInfos = styled.div`
   max-height: 212px;
   margin: 0 1rem;
 

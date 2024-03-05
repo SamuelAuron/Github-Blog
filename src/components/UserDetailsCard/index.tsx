@@ -1,14 +1,12 @@
-import {Avatar, UserContainer, UserContent, UserInfo } from "./styles";
-
+import {Avatar, UserContainer, UserInfos, UserInfo } from "./styles";
 
 import githubIcon from "../../assets/githubIcon.svg"
 import followersIcon from '../../assets/followersIcon.svg'
 import companyIcon from "../../assets/companyIcon.svg"
 import linkIcon from "../../assets/linkIcon.svg"
 
-
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { getUserData } from "../../services/api";
 
 interface UserInfo {
   avatar_url: string
@@ -22,32 +20,21 @@ interface UserInfo {
 
 export function UserDetailsCard(){
   const [userData, setUserData] = useState<UserInfo>()
-  
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const response = await axios.get('https://api.github.com/users/samuelauron', {
-          headers: {
-            Authorization: `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`,
-          },
-        });
-        setUserData(response.data);
-      } catch (error) {
-        console.error('Erro ao buscar dados do usuário:', error);
-      }
-    };
-    console.log(userData)
-    fetchUserData();
-  }, []);
+  useEffect(() =>{
+    const setUser = async () => {
+      const response = await getUserData()
+      setUserData(response)
+    }
 
-  
+    setUser();
+  }, [])
 
   return(
-    
     <UserContainer>
       <Avatar src={userData?.avatar_url} alt="avatar" />
-      <UserContent>
+
+      <UserInfos>
         <h1>{userData?.name}</h1>
         <p>{userData?.bio}</p>
           
@@ -56,6 +43,7 @@ export function UserDetailsCard(){
             <img src={githubIcon} alt="" />
             {userData?.login}
           </UserInfo>
+
           <UserInfo>
             {userData?.company &&
             <>
@@ -64,6 +52,7 @@ export function UserDetailsCard(){
             </> 
             }
           </UserInfo>
+
           <UserInfo>
             <img src={followersIcon} alt="" />
             {userData?.followers}
@@ -71,11 +60,10 @@ export function UserDetailsCard(){
             Seguidores
           </UserInfo>
         </div>
-      </UserContent>
+      </UserInfos>
           
-        
       <a href={userData?.html_url}>
-        GitHub 
+        GITHUB
         <img src={linkIcon} alt="" />  
       </a>
 

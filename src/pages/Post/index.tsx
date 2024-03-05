@@ -19,15 +19,20 @@ interface Issue {
   title: string
   comments: number
   body: string
-  created_at: Date
+  created_at: string
   html_url: string
 }
 
 export function Post() {
 
-  const [issue, setIssue] = useState<Issue>()
+  const [issue, setIssue] = useState<Issue>({
+    title: '',
+    comments: 0,
+    body: '',
+    created_at: '2024-02-19T01:21:27Z',
+    html_url: ''
+  })
   const [user, setUser] = useState('')
-  
 
   useEffect(() => {
     const fetchIssues = async () => {
@@ -39,8 +44,6 @@ export function Post() {
         });
         setIssue(response.data);
         setUser(response.data.user.login)
-        console.log(response.data)
-        console.log(issue?.created_at)
       } catch (error) {
         console.error('Erro ao buscar as issues:', error);
       }
@@ -48,6 +51,11 @@ export function Post() {
     
     fetchIssues();
   }, []);
+
+  const formattedDate = formatDistanceToNow(new Date(issue.created_at), {
+    locale: ptBR,
+    addSuffix: true,
+  })
 
   return(
     <ThemeProvider theme={defaultTheme}>
@@ -69,20 +77,21 @@ export function Post() {
             <div>
               <IssueInfo>
                 <img src={githubIcon} alt="" />
-                {user}
+                <span>{user}</span>
               </IssueInfo>
+              
               <IssueInfo>
                 <img src={calender} alt="" />
-                {formatDistanceToNow(issue?.created_at, {
-                  locale: ptBR,
-                  addSuffix: true,
-                  })}
+                <span>{formattedDate}</span>
               </IssueInfo>
+
               <IssueInfo>
                 <img src={comments} alt="" />
-                {issue?.comments}
-                {' '}
-                comentarios
+                <span>
+                  {issue?.comments}
+                  {' '}
+                  comentarios
+                </span>
               </IssueInfo>
             </div>
           </PostContent>

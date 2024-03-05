@@ -2,6 +2,7 @@ import { PostCardContainer } from "./styles";
 
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import Markdown from "react-markdown";
 
 interface Issue {
   title: string
@@ -20,7 +21,7 @@ export function PostCard({title, body, created_at}: Issue) {
           })}</span>
       </div>
       
-      <p>{body}</p>
+      <Markdown>{body}</Markdown>
     </PostCardContainer>
   )
 }
