@@ -2,7 +2,7 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../styles/global";
 import { defaultTheme } from "../../styles/themes/default";
 import { useEffect, useState } from "react";
-import { IssueInfo, LinkContainer, PostContainer, PostContent, PostText } from "./styles";
+import { Container, IssueInfo, LinkContainer, PostContainer, PostContent, PostText } from "./styles";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -13,7 +13,6 @@ import comments from "../../assets/comments.svg"
 import Markdown from "react-markdown";
 import { getIssueData, getUserData } from "../../services/api";
 import { useParams } from "react-router-dom";
-import remarkGfm from "remark-gfm";
 
 interface Issue {
   title: string
@@ -63,44 +62,47 @@ export function Post() {
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-        <PostContainer>
-          <LinkContainer>
-            <a href="http://localhost:5173/">
-              VOLTAR
-            </a>
-            <a href={issue?.html_url}>
-              VER NO GITHUB
-              <img src={linkIcon} alt="" />  
-            </a>
-          </LinkContainer>
+      <Container>
+      <PostContainer>
+        <LinkContainer>
+          <a href="/">
+            VOLTAR
+          </a>
+          <a href={issue?.html_url}>
+            VER NO GITHUB
+            <img src={linkIcon} alt="" />  
+          </a>
+        </LinkContainer>
           
-          <PostContent>
-            <h1>{issue?.title}</h1>
-            <div>
-              <IssueInfo>
-                <img src={githubIcon} alt="" />
-                <span>{user}</span>
-              </IssueInfo>
+        <PostContent>
+          <h1>{issue?.title}</h1>
+          <div>
+            <IssueInfo>
+              <img src={githubIcon} alt="" />
+              <span>{user}</span>
+            </IssueInfo>
               
-              <IssueInfo>
-                <img src={calender} alt="" />
-                <span>{formattedDate}</span>
-              </IssueInfo>
+            <IssueInfo>
+              <img src={calender} alt="" />
+              <span>{formattedDate}</span>
+            </IssueInfo>
 
-              <IssueInfo>
-                <img src={comments} alt="" />
-                <span>
-                  {issue?.comments}
-                  {' '}
-                  comentarios
-                </span>
-              </IssueInfo>
-            </div>
-          </PostContent>
+            <IssueInfo>
+              <img src={comments} alt="" />
+              <span>
+                {issue?.comments}
+                {' '}
+                comentarios
+              </span>
+            </IssueInfo>
+          </div>
+        </PostContent>
         </PostContainer>
         <PostText>
-        <Markdown remarkPlugins={[remarkGfm]} >{issue?.body}</Markdown>
+          <Markdown >{issue?.body}</Markdown>
         </PostText>
+      </Container>
+      
     </ThemeProvider>   
   )
 }

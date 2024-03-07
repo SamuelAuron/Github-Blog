@@ -27,7 +27,7 @@ export async function getIssuesData() {
     
     return response.data.items
   } catch (error) {
-    console.error('Erro ao buscar dados do usuário:', error);
+    console.error('Erro ao buscar dados das issues:', error);
   }
 }
 
@@ -36,6 +36,6 @@ export async function getIssueData(issueNumber?: string) {
     const response = await axios.get(`${GITHUB_BASE_URL}/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/issues/${issueNumber}`)
     return response.data
   } catch (error) {
-    console.error('Erro ao buscar dados do usuário:', error);
+    console.error('Erro ao buscar dados da issue:', error);
   }
 }

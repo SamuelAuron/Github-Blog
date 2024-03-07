@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const UserContainer = styled.div`
-  max-width: 1120px;
+  max-width: 70rem;
   box-shadow: 0px 2px 28px black;
   padding: 2.5rem 2rem;
   margin: 0 auto;
@@ -29,7 +29,7 @@ export const UserContainer = styled.div`
     color: ${(props) => props.theme.blue};    
 
     img{
-      margin-left: 8px;
+      margin-left: 0.5rem;
     }
   }
 
@@ -44,14 +44,14 @@ export const UserContainer = styled.div`
 `
 
 export const Avatar = styled.img`
-  max-width: 148px;
-  max-height: 148px;
+  max-width: 9.25rem;
+  max-height: 9.25rem;
 
   border-radius: 8px;
 `
 
 export const UserInfos = styled.div`
-  max-height: 212px;
+  max-height: 13.25rem;
   margin: 0 1rem;
 
   display: flex;

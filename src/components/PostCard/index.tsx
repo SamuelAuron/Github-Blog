@@ -20,7 +20,7 @@ export function PostCard({id, title, body, created_at}: Issue) {
   }
 
   return(
-    <PostCardContainer href='' onClick={() => handleCardClick()}>
+    <PostCardContainer onClick={() => handleCardClick()}>
       <div>
         <h2>{title}</h2>
         <span>{formatDistanceToNow(created_at, {
