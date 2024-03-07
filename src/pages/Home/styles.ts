@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Posts = styled.div`
-  max-width: 1184px;
+  max-width: 74rem;
   margin: 0 auto 32px;
 
   display: flex;
@@ -16,8 +16,8 @@ export const SearchFormContainer = styled.form`
   flex-direction: column;
   gap: 1rem;
   
-  max-width: 1184px;
-  margin: 72px auto 48px;
+  max-width: 74rem;
+  margin: 4.5rem auto 3rem;
 
   div{
     display: flex;

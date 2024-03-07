@@ -1,10 +1,8 @@
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../../styles/global";
 import { defaultTheme } from "../../styles/themes/default";
-import { Header } from "../../components/Header";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { IssueInfo, LinkContainer, PostContainer, PostContent, PostText } from "./styles";
+import { Container, IssueInfo, LinkContainer, PostContainer, PostContent, PostText } from "./styles";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -13,7 +11,8 @@ import linkIcon from "../../assets/linkIcon.svg"
 import calender from "../../assets/calender.svg"
 import comments from "../../assets/comments.svg"
 import Markdown from "react-markdown";
-
+import { getIssueData, getUserData } from "../../services/api";
+import { useParams } from "react-router-dom";
 
 interface Issue {
   title: string
@@ -23,7 +22,13 @@ interface Issue {
   html_url: string
 }
 
+interface RouteParams {
+  [key: string]: string | undefined
+  issueNum?: string
+}
+
 export function Post() {
+  const { issueNum } = useParams<RouteParams>()
 
   const [issue, setIssue] = useState<Issue>({
     title: '',
@@ -33,17 +38,14 @@ export function Post() {
     html_url: ''
   })
   const [user, setUser] = useState('')
-
+  
   useEffect(() => {
     const fetchIssues = async () => {
       try {
-        const response = await axios.get('https://api.github.com/repos/SamuelAuron/Github-Blog/issues/1', {
-          //params: {
-          //  q: '',
-          //}
-        });
-        setIssue(response.data);
-        setUser(response.data.user.login)
+        const responseIssue = await getIssueData(issueNum)
+        const responseUser = await getUserData()
+        setIssue(responseIssue);
+        setUser(responseUser.login)
       } catch (error) {
         console.error('Erro ao buscar as issues:', error);
       }
@@ -60,45 +62,47 @@ export function Post() {
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-        <Header />
-        <PostContainer>
-          <LinkContainer>
-            <a href="http://localhost:5173/">
-              VOLTAR
-            </a>
-            <a href={issue?.html_url}>
-              VER NO GITHUB
-              <img src={linkIcon} alt="" />  
-            </a>
-          </LinkContainer>
+      <Container>
+      <PostContainer>
+        <LinkContainer>
+          <a href="/">
+            VOLTAR
+          </a>
+          <a href={issue?.html_url}>
+            VER NO GITHUB
+            <img src={linkIcon} alt="" />  
+          </a>
+        </LinkContainer>
           
-          <PostContent>
-            <h1>{issue?.title}</h1>
-            <div>
-              <IssueInfo>
-                <img src={githubIcon} alt="" />
-                <span>{user}</span>
-              </IssueInfo>
+        <PostContent>
+          <h1>{issue?.title}</h1>
+          <div>
+            <IssueInfo>
+              <img src={githubIcon} alt="" />
+              <span>{user}</span>
+            </IssueInfo>
               
-              <IssueInfo>
-                <img src={calender} alt="" />
-                <span>{formattedDate}</span>
-              </IssueInfo>
+            <IssueInfo>
+              <img src={calender} alt="" />
+              <span>{formattedDate}</span>
+            </IssueInfo>
 
-              <IssueInfo>
-                <img src={comments} alt="" />
-                <span>
-                  {issue?.comments}
-                  {' '}
-                  comentarios
-                </span>
-              </IssueInfo>
-            </div>
-          </PostContent>
+            <IssueInfo>
+              <img src={comments} alt="" />
+              <span>
+                {issue?.comments}
+                {' '}
+                comentarios
+              </span>
+            </IssueInfo>
+          </div>
+        </PostContent>
         </PostContainer>
         <PostText>
-        <Markdown>{issue?.body}</Markdown>
+          <Markdown >{issue?.body}</Markdown>
         </PostText>
+      </Container>
+      
     </ThemeProvider>   
   )
 }

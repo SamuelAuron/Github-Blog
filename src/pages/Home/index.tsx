@@ -1,4 +1,3 @@
-import { Header } from "../../components/Header";
 import { UserDetailsCard } from "../../components/UserDetailsCard";
 import { GlobalStyle } from "../../styles/global";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -42,7 +41,6 @@ export function Home() {
   return(
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      <Header />
       <UserDetailsCard/>
       <SearchFormContainer>
         <div>
@@ -61,6 +59,7 @@ export function Home() {
           return(
             <PostCard 
               key={issue.number} 
+              id={issue.number}
               title={issue.title}
               body={issue.body}
               created_at={issue.created_at}
