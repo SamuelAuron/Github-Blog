@@ -2,7 +2,7 @@
 
 Github Blog é uma aplicação que utilizará da API do GitHub para buscar issues de um repositório, dados do seu perfil e exibir elas como um blog.
 
-<h4 align="center"><a href="[https://github-blog-rocketseat.vercel.app/](https://github-blog-two-sigma.vercel.app/)">Clique para visitar o projeto</a></h4>
+<h4 align="center"><a href="https://github-blog-two-sigma.vercel.app/">Clique para visitar o projeto</a></h4>
 
 ## Funcionalidades
 - 😄 Listagem do seu perfil com imagem, número de seguidores, nome e outras informações disponíveis pela API do GitHub.
